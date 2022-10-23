@@ -12,7 +12,7 @@
 
 package JSirius;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-10-23T22:11:19.826751Z[Etc/UTC]")public class StringUtil {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-10-23T22:16:24.194165Z[Etc/UTC]")public class StringUtil {
   /**
    * Check if the given array contains the given value (with case-insensitive comparison).
    *

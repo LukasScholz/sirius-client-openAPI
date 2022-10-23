@@ -34,7 +34,7 @@ import java.util.Map;
  * Object to submit a job to be executed by SIRIUS
  */
 @Schema(description = "Object to submit a job to be executed by SIRIUS")
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-10-23T22:11:19.826751Z[Etc/UTC]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-10-23T22:16:24.194165Z[Etc/UTC]")
 public class JobSubmission {
   @SerializedName("compoundIds")
   private List<String> compoundIds = null;
