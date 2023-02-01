@@ -27,4 +27,4 @@ sed -i "s@^\([[:blank:]]*\)self\$api_client\$deserialize(local_var_resp\$respons
 # delete lines
 sed -i '/^[[:blank:]]*if (!is.null(`request_body`)) {/{n;N;N;N;d}' $1
 #insert new line with fitting indentation
-sed -i 's/^\([[:blank:]]*\)if (!is.null(`request_body`)) {/\1if (!is.null(`request_body`)) {\n\1  paste0("[", paste(unlist(lapply(`request_body`, function(param) {jsonlite::toJSON(param)})), collapse = ","), "]")/' $1
+sed -i 's/^\([[:blank:]]*\)if (!is.null(`request_body`)) {/\1if (!is.null(`request_body`)) {\n\1  local_var_body <- paste0("[", paste(unlist(lapply(`request_body`, function(param) {jsonlite::toJSON(param)})), collapse = ","), "]")/' $1
