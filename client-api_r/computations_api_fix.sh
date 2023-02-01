@@ -18,9 +18,11 @@ if [ ! -f $1 ]; then
   exit 1
 fi
 
+## In: PostJobConfigWithHttpInfo 
 # fix deserialization of response coming back as simple string and not as JSON
 sed -i "s@^\([[:blank:]]*\)self\$api_client\$deserialize(local_var_resp\$response, \"character\", loadNamespace(\"Rsirius\")),@\1self\$api_client\$deserialize(jsonlite::toJSON(local_var_resp\$response), \"character\", loadNamespace(\"Rsirius\")),@" $1
 
+## In: StartJobFromConfigWithHttpInfo
 ## fix multi-row if statement
 # delete lines
 sed -i '/^[[:blank:]]*if (!is.null(`request_body`)) {/{n;N;N;N;d}' $1
