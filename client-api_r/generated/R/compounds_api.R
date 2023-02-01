@@ -607,7 +607,7 @@ CompoundsApi <- R6::R6Class(
       query_params[["ignoreFormulas"]] <- `ignore_formulas`
 
       if (!is.null(`request_body`)) {
-        local_var_body <- paste0("[", paste(unlist(lapply(`request_body`, function(param) {jsonlite::toJSON(param)})), collapse = ","), "]")
+        local_var_body <- jsonlite::toJSON(`request_body`)
       } else {
         body <- NULL
       }
