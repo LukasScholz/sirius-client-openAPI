@@ -23,7 +23,7 @@ fi
 sed -i "s@^\([[:blank:]]*\)self\$api_client\$deserialize(local_var_resp\$response, \"character\", loadNamespace(\"Rsirius\")),@\1self\$api_client\$deserialize(jsonlite::toJSON(local_var_resp\$response), \"character\", loadNamespace(\"Rsirius\")),@" $1
 
 ## In: StartJobFromConfigWithHttpInfo
-## fix multi-row if statement
+# fix multi-row if statement
 # delete lines
 sed -i '/^[[:blank:]]*if (!is.null(`request_body`)) {/{n;N;N;N;d}' $1
 #insert new line with fitting indentation
