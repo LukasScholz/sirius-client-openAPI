@@ -225,6 +225,7 @@ test_that("StartJobFromConfig", {
   request_body <- c("/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/examples/ms/Bicuculline.ms", 
                     "/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/examples/ms/Kaempferol.ms")
   compounds_api$ImportCompounds(pid_dir[1], request_body)
+  Sys.sleep(1)
   comps <- compounds_api$GetCompounds(pid_dir[1])
   comps <- c(comps[[1]]$id, comps[[2]]$id) 
   job <- api_instance$StartJobFromConfig(pid_dir[1], "startJobConfig", comps, TRUE, FALSE, FALSE, FALSE)
