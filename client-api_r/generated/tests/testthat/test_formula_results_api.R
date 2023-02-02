@@ -102,8 +102,10 @@ test_that("GetFragTree", {
   sub$recompute <- TRUE
   computations_api$PostJobConfig("formRes6", sub, TRUE)
   Sys.sleep(1)
-  computations_api$StartJobFromConfig(pid_dir[1], "formRes6", compoundId, TRUE, FALSE, FALSE, FALSE)
-  Sys.sleep(10)
+  job <- computations_api$StartJobFromConfig(pid_dir[1], "formRes6", compoundId, TRUE, FALSE, FALSE, FALSE)
+  while (!(computations_api$GetJob(pid_dir[1], job$id)$progress$state == "DONE")) {
+    Sys.sleep(1)
+  }
   resp <- api_instance$GetFragTree(pid_dir[1], compoundId, formulaId)
   
   expect_equal(is.list(resp$fragments), TRUE)
