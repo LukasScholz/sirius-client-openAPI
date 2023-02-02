@@ -103,6 +103,9 @@ test_that("GetFragTree", {
   computations_api$PostJobConfig("formRes6", sub, TRUE)
   Sys.sleep(1)
   job <- computations_api$StartJobFromConfig(pid_dir[1], "formRes6", compoundId, TRUE, FALSE, FALSE, FALSE)
+  
+  expect_equal(grepl("^[0-9]+$", job$id), TRUE)
+  
   while (!(computations_api$GetJob(pid_dir[1], job$id)$progress$state == "DONE")) {
     Sys.sleep(1)
   }
