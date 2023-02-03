@@ -93,15 +93,17 @@ test_that("GetFragTree", {
   # @param formula_id character identifier of the requested formula result
   # @return [FragmentationTree]
 
+  expect_equal(file.exists(data), TRUE)
+  
   pid_dir <- new_ps("formRes6", "formResDir6")
     
   compounds_api$ImportCompounds(pid_dir[1], data)
-  Sys.sleep(1)
+  Sys.sleep(5)
   sub <- computations_api$GetDefaultJobConfig()
   sub$zodiacParas <- NULL
   sub$recompute <- TRUE
   computations_api$PostJobConfig("formRes6", sub, TRUE)
-  Sys.sleep(1)
+  Sys.sleep(5)
   job <- computations_api$StartJobFromConfig(pid_dir[1], "formRes6", compoundId, TRUE, FALSE, FALSE, FALSE)
   
   expect_equal(grepl("^[0-9]+$", job$id), TRUE)
@@ -109,6 +111,7 @@ test_that("GetFragTree", {
   while (!(computations_api$GetJob(pid_dir[1], job$id)$progress$state == "DONE")) {
     Sys.sleep(1)
   }
+  expect_euqal(computations_api$GetJob(pid_dir[1], job$id)$progress$state, "DONE")
   resp <- api_instance$GetFragTree(pid_dir[1], compoundId, formulaId)
   
   expect_equal(is.list(resp$fragments), TRUE)
