@@ -111,7 +111,7 @@ test_that("GetFragTree", {
   while (!(computations_api$GetJob(pid_dir[1], job$id)$progress$state == "DONE")) {
     Sys.sleep(1)
   }
-  expect_euqal(computations_api$GetJob(pid_dir[1], job$id)$progress$state, "DONE")
+  expect_equal(computations_api$GetJob(pid_dir[1], job$id)$progress$state, "DONE")
   resp <- api_instance$GetFragTree(pid_dir[1], compoundId, formulaId)
   
   expect_equal(is.list(resp$fragments), TRUE)
