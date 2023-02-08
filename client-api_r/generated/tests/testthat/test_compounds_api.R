@@ -132,12 +132,12 @@ test_that("ImportCompoundsFromString", {
   
   resp <- api_instance$ImportCompoundsFromString(pid_dir[1], "ms", paste(readLines("/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/clientTests/Data/Kaempferol.ms", warn=FALSE), collapse="\n"), "msfile")
   
-  compound <- api_instance$GetCompound(pid_dir[1], resp$id)
+  compound <- api_instance$GetCompound(pid_dir[1], resp[[1]]$id)
   expect_true(inherits(compound, "CompoundId"))
   
   resp <- api_instance$ImportCompoundsFromString(pid_dir[1], "mgf", paste(readLines("/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/clientTests/Data/laudanosine.mgf", warn=FALSE), collapse="\n"), "mgffile")
   
-  compound <- api_instance$GetCompound(pid_dir[1], resp$id)
+  compound <- api_instance$GetCompound(pid_dir[1], resp[[1]]$id)
   expect_true(inherits(compound, "CompoundId"))
   
   withr::defer(api_instance$DeleteCompound(pid_dir[1], "1_msfile_Kaempferol"))
