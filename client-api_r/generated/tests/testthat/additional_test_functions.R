@@ -1,6 +1,5 @@
 # wait for job to finish
 wait_for_job <- function(pid, job) {
-  Sys.sleep(1)
   while (!(ComputationsApi$new()$GetJob(pid, job$id)$progress$state == "DONE")) {
     Sys.sleep(1)
   }
