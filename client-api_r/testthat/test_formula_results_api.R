@@ -10,7 +10,7 @@ compoundId <- "1_Bicuculline_Bicuculline"
 formulaId <- "C20H17NO6_[M+H]+"
 pid <- "formRes"
 dir <- "formResDir"
-ProjectSpacesApi$new()$CreateProjectSpace(pid, dir, "/home/joxem/SHK/sirius-client-openAPI/.updater/clientTests/Data/test-project-results", TRUE)
+ProjectSpacesApi$new()$CreateProjectSpace(pid, dir, "/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/clientTests/Data/test-project-results", TRUE)
 
 test_that("GetBestMatchingCanopusPredictions", {
   # tests for GetBestMatchingCanopusPredictions
