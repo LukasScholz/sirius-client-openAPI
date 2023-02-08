@@ -27,8 +27,7 @@ test_that("DeleteCompound", {
   expect_equal(is.list(resp), TRUE)
   expect_equal(length(resp), 2)
   
-  job <- api_instance$DeleteCompound(pid_dir[1], "1_Bicuculline_Bicuculline")
-  wait_for_job(pid_dir[1], job)
+  api_instance$DeleteCompound(pid_dir[1], "1_Bicuculline_Bicuculline")
   resp <- api_instance$GetCompounds(pid_dir[1])
   
   expect_equal(is.list(resp), TRUE)
@@ -54,16 +53,16 @@ test_that("GetCompound", {
   wait_for_job(pid_dir[1], job)
   
   resp <- api_instance$GetCompound(pid_dir[1], "1_Bicuculline_Bicuculline")
-  expect_true(inhertis(resp, "CompoundId"))
+  expect_true(inherits(resp, "CompoundId"))
   
   resp <- api_instance$GetCompound(pid_dir[1], "1_Bicuculline_Bicuculline", TRUE)
-  expect_true(inhertis(resp, "CompoundId"))
+  expect_true(inherits(resp, "CompoundId"))
   
   resp <- api_instance$GetCompound(pid_dir[1], "1_Bicuculline_Bicuculline", FALSE, TRUE)
-  expect_true(inhertis(resp, "CompoundId"))
+  expect_true(inherits(resp, "CompoundId"))
   
   resp <- api_instance$GetCompound(pid_dir[1], "1_Bicuculline_Bicuculline", TRUE, TRUE)
-  expect_true(inhertis(resp, "CompoundId"))
+  expect_true(inherits(resp, "CompoundId"))
     
   withr::defer(compounds_td(pid_dir)) 
 })
