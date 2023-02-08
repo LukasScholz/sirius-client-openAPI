@@ -6,9 +6,11 @@ context("Test FormulaResultsApi")
 api_instance <- FormulaResultsApi$new()
 compounds_api <- CompoundsApi$new()
 computations_api <- ComputationsApi$new()
-data <- "/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/examples/ms/Bicuculline.ms"
 compoundId <- "1_Bicuculline_Bicuculline"
 formulaId <- "C20H17NO6_[M+H]+"
+pid <- "formRes"
+dir <- "formResDir"
+ProjectSpacesApi$new()$CreateProjectSpace(pid, dir, "/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/clientTests/Data/test-project-results", TRUE)
 
 test_that("GetBestMatchingCanopusPredictions", {
   # tests for GetBestMatchingCanopusPredictions
@@ -20,8 +22,10 @@ test_that("GetBestMatchingCanopusPredictions", {
   # @param formula_id character identifier of the requested formula result
   # @return [CompoundClasses]
 
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
+  resp <- api_instance$GetBestMatchingCanopusPredictions(pid, compoundId, formulaId)
+  
+  # response is object of CompoundClasses
+  expect_true(inherits(resp, "CompoundClasses"))
 })
 
 test_that("GetCanopusPredictions", {
@@ -34,8 +38,10 @@ test_that("GetCanopusPredictions", {
   # @param formula_id character identifier of the requested formula result
   # @return [CanopusPredictions]
 
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
+  resp <- api_instance$GetCanopusPredictions(pid, compoundId, formulaId)
+  
+  # response is object of CanopusPredictions
+  expect_true(inherits(resp, "CanopusPredictions"))
 })
 
 test_that("GetFingerprintPrediction", {
@@ -48,8 +54,10 @@ test_that("GetFingerprintPrediction", {
   # @param formula_id character identifier of the requested formula result
   # @return [array[numeric]]
 
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
+  resp <- api_instance$GetFingerprintPrediction(pid, compoundId, formulaId)
+  
+  # response is list of doubles
+  expect_true(is.list(resp) & all(sapply(resp, is.double)))
 })
 
 test_that("GetFormulaIds", {
@@ -93,32 +101,10 @@ test_that("GetFragTree", {
   # @param formula_id character identifier of the requested formula result
   # @return [FragmentationTree]
 
-  expect_equal(file.exists(data), TRUE)
+  resp <- api_instance$GetFragTree(pid, compoundId, formulaId)
   
-  pid_dir <- new_ps("formRes6", "formResDir6")
-    
-  compounds_api$ImportCompounds(pid_dir[1], data)
-  Sys.sleep(5)
-  sub <- computations_api$GetDefaultJobConfig()
-  sub$zodiacParas <- NULL
-  sub$recompute <- TRUE
-  computations_api$PostJobConfig("formRes6", sub, TRUE)
-  Sys.sleep(5)
-  job <- computations_api$StartJobFromConfig(pid_dir[1], "formRes6", compoundId, TRUE, FALSE, FALSE, FALSE)
-  
-  expect_equal(grepl("^[0-9]+$", job$id), TRUE)
-  
-  while (!(computations_api$GetJob(pid_dir[1], job$id)$progress$state == "DONE")) {
-    Sys.sleep(1)
-  }
-  expect_equal(computations_api$GetJob(pid_dir[1], job$id)$progress$state, "DONE")
-  resp <- api_instance$GetFragTree(pid_dir[1], compoundId, formulaId)
-  
-  expect_equal(is.list(resp$fragments), TRUE)
-  expect_equal(is.list(resp$losses), TRUE)
-  expect_equal(is.numeric(resp$treeScore), TRUE)
-  
-  withr::defer(formula_results_td(pid_dir))
+  # response is object of FragmentationTree
+  expect_true(inherits(resp, "FragmentationTree"))
 })
 
 test_that("GetSimulatedIsotopePattern", {
@@ -168,3 +154,5 @@ test_that("GetTopStructureCandidate", {
   # uncomment below to test the operation
   #expect_equal(result, "EXPECTED_RESULT")
 })
+
+withr::defer(formula_results_td(c(pid, dir)))
