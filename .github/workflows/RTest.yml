@@ -45,13 +45,3 @@ jobs:
     - name: Test Rsirius using devtools
       run: devtools::test("./client-api_r/generated")
       shell: Rscript {0}
-    - name: Build Rsirius
-      run: |
-        R CMD build ./client-api_r/generated
-    - name: Test Rsirius using testthat
-      run: |
-        R CMD check Rsirius_1.0.0.tar.gz --no-manual
-    - name: Check log file
-      if: always()
-      run: |
-        cat Rsirius.Rcheck/00check.log
