@@ -4,8 +4,6 @@
 context("Test FormulaResultsApi")
 
 api_instance <- FormulaResultsApi$new()
-compounds_api <- CompoundsApi$new()
-computations_api <- ComputationsApi$new()
 compoundId <- "1_Bicuculline_Bicuculline"
 formulaId <- "C20H17NO6_[M+H]+"
 pid <- "formRes"
@@ -24,7 +22,7 @@ test_that("GetBestMatchingCanopusPredictions", {
 
   resp <- api_instance$GetBestMatchingCanopusPredictions(pid, compoundId, formulaId)
   
-  # response is object of CompoundClasses
+  # response is CompoundClasses instance
   expect_true(inherits(resp, "CompoundClasses"))
 })
 
@@ -40,7 +38,7 @@ test_that("GetCanopusPredictions", {
 
   resp <- api_instance$GetCanopusPredictions(pid, compoundId, formulaId)
   
-  # response is object of CanopusPredictions
+  # response is CanopusPredictions instance
   expect_true(inherits(resp, "CanopusPredictions"))
 })
 
@@ -57,7 +55,7 @@ test_that("GetFingerprintPrediction", {
   resp <- api_instance$GetFingerprintPrediction(pid, compoundId, formulaId)
   
   # response is list of doubles
-  expect_true(is.list(resp) & all(sapply(resp, is.double)))
+  expect_true(is.list(resp) && all(sapply(resp, is.double)))
 })
 
 test_that("GetFormulaIds", {
@@ -70,9 +68,17 @@ test_that("GetFormulaIds", {
   # @param result_overview character add ResultOverview to the FormulaResultContainers (optional)
   # @param formula_candidate character add extended formula candidate information to the FormulaResultContainers (optional)
   # @return [array[FormulaResultContainer]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
+  
+  for (i in c(TRUE, FALSE)) {
+    for (j in c(TRUE, FALSE)) {
+      resp <- api_instance$GetFormulaIds(pid, compoundId, i, j)
+      # response is list of FormulaResultContainer instances
+      expect_true(is.list(resp) && all(sapply(resp, function(x) {inherits(x, "FormulaResultContainer")})))
+      
+      if (i) { expect_true(is.list(resp) && all(sapply(resp, function(x) {inherits(x$resultOverview, "ResultOverview")}))) }
+      if (j) { expect_true(is.list(resp) && all(sapply(resp, function(x) {inherits(x$candidate, "FormulaCandidate")}))) }
+    }
+  }
 })
 
 test_that("GetFormulaResult", {
@@ -87,8 +93,16 @@ test_that("GetFormulaResult", {
   # @param formula_candidate character add extended formula candidate information to the FormulaResultContainer (optional)
   # @return [FormulaResultContainer]
 
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
+  for (i in c(TRUE, FALSE)) {
+    for (j in c(TRUE, FALSE)) {
+      resp <- api_instance$GetFormulaResult(pid, compoundId, formulaId, i, j)
+      # response is FormulaResultContainer instance
+      expect_true(inherits(resp, "FormulaResultContainer"))
+      
+      if (i) { expect_true(inherits(resp$resultOverview, "ResultOverview")) }
+      if (j) { expect_true(inherits(resp$candidate, "FormulaCandidate")) }
+    }
+  }
 })
 
 test_that("GetFragTree", {
@@ -103,7 +117,7 @@ test_that("GetFragTree", {
 
   resp <- api_instance$GetFragTree(pid, compoundId, formulaId)
   
-  # response is object of FragmentationTree
+  # response is FragmentationTree instance
   expect_true(inherits(resp, "FragmentationTree"))
 })
 
@@ -117,8 +131,10 @@ test_that("GetSimulatedIsotopePattern", {
   # @param formula_id character identifier of the requested formula result
   # @return [AnnotatedSpectrum]
 
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
+  resp <- api_instance$GetSimulatedIsotopePattern(pid, compoundId, formulaId)
+  
+  # response is AnnotatedSpectrum instance
+  expect_true(inherits(resp, "AnnotatedSpectrum"))
 })
 
 test_that("GetStructureCandidates", {
@@ -135,8 +151,18 @@ test_that("GetStructureCandidates", {
   # @param top_k integer retrieve only the top k StructureCandidates (optional)
   # @return [array[StructureCandidate]]
 
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
+#   for (i in c(TRUE, FALSE)) {
+#     for (j in c(TRUE, FALSE)) {
+#       for (k in c(TRUE, FALSE)) {
+#         resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, i, j, k, num)
+#         # response is FormulaResultContainer
+#         expect_true(inherits(resp, "FormulaResultContainer"))
+
+#         if (i) { expect_true(inherits(resp$resultOverview, "ResultOverview")) }
+#         if (j) { expect_true(inherits(resp$candidate, "FormulaCandidate")) }
+#       }
+#     }
+#   }
 })
 
 test_that("GetTopStructureCandidate", {
@@ -151,8 +177,28 @@ test_that("GetTopStructureCandidate", {
   # @param pub_med_ids character add PubMedIds (citation count) to StructureCandidates (optional)
   # @return [StructureCandidate]
 
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
+  for (i in c(TRUE, FALSE)) {
+    for (j in c(TRUE, FALSE)) {
+      for (k in c(TRUE, FALSE)) {
+        resp <- api_instance$GetTopStructureCandidate(pid, compoundId, i, j, k)
+        # response is StructureCandidate instance
+        expect_true(inherits(resp, "StructureCandidate"))
+
+        # fpBitsSet is list of length > 0 and filled with Integers
+        if (i) { expect_true(is.list(resp$fpBitsSet) && 
+                             length(resp$fpBitsSet) > 0 && 
+                             all(sapply(resp$fpBitsSet, function(x) {x%%1==0}))) }
+        # dbLinks is list of length > 0 and filled with DBLink instances
+        if (j) { expect_true(is.list(resp$dbLinks) && 
+                             length(resp$dbLinks) > 0 && 
+                             all(sapply(resp$dbLinks, function(x) {inherits(x, "DBLink")}))) }
+        # pubmedIds is list of length > 0 and filled with Integers
+        if (k) { expect_true(is.list(resp$pubmedIds) &&
+                             length(resp$pubmedIds) > 0  && 
+                             all(sapply(resp$pubmedIds, function(x) {x%%1==0}))) }
+      }
+    }
+  }
 })
 
 withr::defer(formula_results_td(c(pid, dir)))
