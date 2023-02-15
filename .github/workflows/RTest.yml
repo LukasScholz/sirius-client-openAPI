@@ -42,6 +42,12 @@ jobs:
         extra-packages: |
           any::devtools
         working-directory: ./client-api_r/generated
+    - name: Build Rsirius
+      run: |
+        R CMD build ./client-api_r/generated
+    - name: Install Rsirius
+      run: |
+        R CMD INSTALL --preclean Rsirius_1.0.0.tar.gz
     - name: Test Rsirius using devtools
       run: devtools::test("./client-api_r/generated")
       shell: Rscript {0}
