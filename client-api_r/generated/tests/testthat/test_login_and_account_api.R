@@ -20,6 +20,7 @@ test_that("GetAccountInfo", {
   }
   resp <- api_instance$GetAccountInfo(TRUE)
 
+  expect_true(FALSE)
   expect_equal(resp$username, user)
   expect_true(is.character(resp$subscriptions[[1]]$sid))
 })
