@@ -160,7 +160,6 @@ test_that("GetStructureCandidates", {
         resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, i, j, k, num[count])
         # response is array[StructureCandidate]
         expect_true(is.list(resp) && all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})))
-        expect_equal(TRUE, FALSE)
       }
     }
   }
