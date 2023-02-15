@@ -45,6 +45,9 @@ jobs:
     - name: Build Rsirius
       run: |
         R CMD build ./client-api_r/generated
-    - name: Test Rsirius using testthat
+    - name: Install Rsirius
       run: |
-        R CMD check Rsirius_1.0.0.tar.gz --no-manual
+        R CMD INSTALL --preclean Rsirius_1.0.0.tar.gz
+    - name: Test Rsirius using devtools
+      run: library(Rsirius); devtools::test("./client-api_r/generated")
+      shell: Rscript {0}
