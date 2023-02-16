@@ -46,15 +46,15 @@ jobs:
       run: |
         R CMD INSTALL --preclean Rsirius_1.0.0.tar.gz
     - name: Run Rsirius
-      run: library(Rsirius)
-        api_instance <- FormulaResultsApi$new()
-        compoundId <- "1_Bicuculline_Bicuculline"
-        formulaId <- "C20H17NO6_[M+H]+"
-        pid <- "formRes"
-        dir <- "formResDir"
-        ProjectSpacesApi$new()$CreateProjectSpace(pid, dir, "/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/clientTests/Data/test-project-results", TRUE)
-        resp <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10)
-        resp$response
-        resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10)
+      run: library(Rsirius);
+        api_instance <- FormulaResultsApi$new();
+        compoundId <- "1_Bicuculline_Bicuculline";
+        formulaId <- "C20H17NO6_[M+H]+";
+        pid <- "formRes";
+        dir <- "formResDir";
+        ProjectSpacesApi$new()$CreateProjectSpace(pid, dir, "/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/clientTests/Data/test-project-results", TRUE);
+        resp <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
+        resp$response;
+        resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
         resp
       shell: Rscript {0}
