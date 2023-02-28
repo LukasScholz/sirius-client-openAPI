@@ -319,7 +319,9 @@ ApiClient  <- R6::R6Class(
         print("### Inner return type ###")
         print(inner_return_type)
         if (c(inner_return_type) %in% primitive_types) {
+          print("### Return object ###")
           return_obj <- vector("list", length = length(obj))
+          print(return_obj)
           if (length(obj) > 0) {
             for (row in 1:length(obj)) {
               print("### Row object ###")
@@ -329,7 +331,9 @@ ApiClient  <- R6::R6Class(
           }
         } else {
           if (!is.null(nrow(obj))) {
+            print("### Return object ###")
             return_obj <- vector("list", length = nrow(obj))
+            print(return_obj)
             if (nrow(obj) > 0) {
               for (row in 1:nrow(obj)) {
                 print("### Row object ###")
