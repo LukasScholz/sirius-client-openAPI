@@ -319,22 +319,14 @@ ApiClient  <- R6::R6Class(
         print("### Inner return type ###")
         print(inner_return_type)
         if (c(inner_return_type) %in% primitive_types) {
-          print("### Return object ###")
           return_obj <- vector("list", length = length(obj))
-          print(return_obj)
           if (length(obj) > 0) {
-            if (is.list(obj[1])) {
-              for (row in 1:length(obj[1])) {
-                print("### Row object ###")
-                return_obj[[row]] <- self$deserializeObj(obj[1][row], inner_return_type, pkg_env)
-                print(return_obj[[row]])
-              }
-            } else {
-              for (row in 1:length(obj)) {
-                print("### Row object ###")
-                return_obj[[row]] <- self$deserializeObj(obj[row], inner_return_type, pkg_env)
-                print(return_obj[[row]])
-              }
+            print("### OBJECT ###")
+            print(obj)
+            for (row in 1:length(obj)) {
+              print("### Row object ###")
+              return_obj[[row]] <- self$deserializeObj(obj[row], inner_return_type, pkg_env)
+              print(return_obj[[row]])
             }
           }
         } else {
