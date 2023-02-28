@@ -58,7 +58,7 @@ jobs:
         resp2 <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, FALSE, TRUE, FALSE, 10);
         resp2$response;
         resp2 <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, FALSE, TRUE, FALSE, 10);
-        resp2
+        resp2;
         resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
         isTRUE(is.list(resp));
         sapply(resp, function(x) {print(x)});
