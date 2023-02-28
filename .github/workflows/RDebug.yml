@@ -55,8 +55,11 @@ jobs:
         ProjectSpacesApi$new()$CreateProjectSpace(pid, dir, "/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/clientTests/Data/test-project-results", TRUE);
         resp <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
         resp$response;
+        resp2 <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, FALSE, TRUE, FALSE, 10);
+        resp2$response;
         resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
         isTRUE(is.list(resp));
+        sapply(resp, function(x) {print(x)});
         isTRUE(all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
         isTRUE(is.list(resp) && all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
         resp
