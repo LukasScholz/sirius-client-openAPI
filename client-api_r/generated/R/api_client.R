@@ -335,7 +335,6 @@ ApiClient  <- R6::R6Class(
         } else {
           if (!is.null(nrow(obj))) {
             return_obj <- vector("list", length = nrow(obj))
-            print(return_obj)
             if (nrow(obj) > 0) {
               for (row in 1:nrow(obj)) {
                 return_obj[[row]] <- self$deserializeObj(obj[row, , drop = FALSE],
