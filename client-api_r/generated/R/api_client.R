@@ -331,9 +331,9 @@ ApiClient  <- R6::R6Class(
             if (nrow(obj) > 0) {
               for (row in 1:nrow(obj)) {
                 print("### Row object ###")
-                print(return_obj[[row]])
                 return_obj[[row]] <- self$deserializeObj(obj[row, , drop = FALSE],
                                                          inner_return_type, pkg_env)
+                print(return_obj[[row]])
               }
             }
           }
