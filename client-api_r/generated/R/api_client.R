@@ -323,7 +323,7 @@ ApiClient  <- R6::R6Class(
           if (length(obj) > 0) {
             print("### OBJECT ###")
             print(obj)
-            if (all(inner_return_type == "integer", is.list(obj), is.list(obj[[1]]))) {
+            if (all(inner_return_type == "integer", is.list(obj))) {
               for (row in 1:length(obj[[1]])) {
                 print("### Row object ###")
                 return_obj[[row]] <- self$deserializeObj(obj[[1]][row], inner_return_type, pkg_env)
