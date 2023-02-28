@@ -56,5 +56,8 @@ jobs:
         resp <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
         resp$response;
         resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
-        isTRUE(is.list(resp) && all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})))
+        isTRUE(is.list(resp));
+        isTRUE(all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
+        isTRUE(is.list(resp) && all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
+        resp
       shell: Rscript {0}
