@@ -53,21 +53,21 @@ jobs:
         pid <- "formRes";
         dir <- "formResDir";
         ProjectSpacesApi$new()$CreateProjectSpace(pid, dir, "/home/runner/work/sirius-client-openAPI/sirius-client-openAPI/.updater/clientTests/Data/test-project-results", TRUE);
-        resp3 <- api_instance$GetTopStructureCandidateWithHttpInfo(pid, compoundId, TRUE, TRUE, TRUE);
-        resp3$response;
-        resp3 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, TRUE, TRUE);
-        resp3;
-#         resp <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
-#         resp$response;
+        resp <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
+        resp$response;
+        resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
+        isTRUE(is.list(resp));
+        sapply(resp, function(x) {print(x)});
+        isTRUE(all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
+        isTRUE(is.list(resp) && all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
+        resp
 #         resp2 <- api_instance$GetStructureCandidatesWithHttpInfo(pid, compoundId, formulaId, FALSE, TRUE, FALSE, 10);
 #         resp2$response;
 #         resp2 <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, FALSE, TRUE, FALSE, 10);
 #         resp2;
+#         resp3 <- api_instance$GetTopStructureCandidateWithHttpInfo(pid, compoundId, TRUE, TRUE, TRUE);
+#         resp3$response;
+#         resp3 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, TRUE, TRUE);
+#         resp3;
         
-#         resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
-#         isTRUE(is.list(resp));
-#         sapply(resp, function(x) {print(x)});
-#         isTRUE(all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
-#         isTRUE(is.list(resp) && all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
-#         resp
       shell: Rscript {0}
