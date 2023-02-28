@@ -323,10 +323,18 @@ ApiClient  <- R6::R6Class(
           return_obj <- vector("list", length = length(obj))
           print(return_obj)
           if (length(obj) > 0) {
-            for (row in 1:length(obj)) {
-              print("### Row object ###")
-              return_obj[[row]] <- self$deserializeObj(obj[row], inner_return_type, pkg_env)
-              print(return_obj[[row]])
+            if (is.list(obj[1])) {
+              for (row in 1:length(obj[1])) {
+                print("### Row object ###")
+                return_obj[[row]] <- self$deserializeObj(obj[1][row], inner_return_type, pkg_env)
+                print(return_obj[[row]])
+              }
+            } else {
+              for (row in 1:length(obj)) {
+                print("### Row object ###")
+                return_obj[[row]] <- self$deserializeObj(obj[row], inner_return_type, pkg_env)
+                print(return_obj[[row]])
+              }
             }
           }
         } else {
