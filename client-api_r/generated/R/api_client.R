@@ -317,7 +317,7 @@ ApiClient  <- R6::R6Class(
         inner_return_type <- regmatches(return_type,
                                         regexec(pattern = "array\\[(.*)\\]", return_type))[[1]][2]
         if (c(inner_return_type) %in% primitive_types) {
-          if (all(inner_return_type == "integer", is.list(obj))) {
+          if (all(inner_return_type == "integer", is.list(obj), is.list(obj[[1]]))) {
             return_obj <- vector("list", length = length(obj[[1]]))
             if (length(obj[[1]]) > 0) {
               for (row in 1:length(obj[[1]])) {
