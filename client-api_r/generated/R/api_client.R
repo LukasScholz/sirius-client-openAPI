@@ -319,7 +319,7 @@ ApiClient  <- R6::R6Class(
 
         if (c(inner_return_type) %in% primitive_types) {
 
-          if (inner_return_type == "integer"         if (c(inner_return_type) %in% primitive_types) {        if (c(inner_return_type) %in% primitive_types) { is.list(obj)         if (c(inner_return_type) %in% primitive_types) {        if (c(inner_return_type) %in% primitive_types) { length(obj)>0         if (c(inner_return_type) %in% primitive_types) {        if (c(inner_return_type) %in% primitive_types) { exists("obj"[[1]])) {
+          if (inner_return_type == "integer" && is.list(obj) && length(obj)>0 && exists("obj"[[1]])) {
 
             return_obj <- vector("list", length = length(obj[[1]]))
 
