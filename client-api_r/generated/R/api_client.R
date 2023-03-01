@@ -301,6 +301,7 @@ ApiClient  <- R6::R6Class(
     #' @return Deserialized object.
     #' @export
     deserializeObj = function(obj, return_type, pkg_env) {
+      print(paste0("# RETURN TYPE:",return_type))
       return_obj <- NULL
       primitive_types <- c("character", "numeric", "integer", "logical", "complex")
 
@@ -324,7 +325,7 @@ ApiClient  <- R6::R6Class(
               for (row in 1:length(obj[[1]])) {
                 return_obj[[row]] <- self$deserializeObj(obj[[1]][row], inner_return_type, pkg_env)
                 print("# Integer return object row:")
-                return_obj[[row]]
+                print(return_obj[[row]])
               }
             }
           } else {
@@ -333,7 +334,7 @@ ApiClient  <- R6::R6Class(
               for (row in 1:length(obj)) {
                 return_obj[[row]] <- self$deserializeObj(obj[row], inner_return_type, pkg_env)
                 print("# Return object row:")
-                return_obj[[row]]
+                print(return_obj[[row]])
               }
             }
           }
