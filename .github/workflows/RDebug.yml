@@ -59,7 +59,6 @@ jobs:
         
         resp1 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, TRUE, TRUE);
         resp2 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, TRUE, TRUE);
-        resp2http <- api_instance$GetTopStructureCandidateWithHttpInfo(pid, compoundId, FALSE, TRUE, TRUE);
         resp3 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, FALSE, TRUE);
         resp4 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, TRUE, FALSE);
         resp5 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, FALSE, TRUE);
@@ -70,8 +69,6 @@ jobs:
         resp1;
         print("### RESP 2");
         resp2;
-        print("### RESP 2 HTTP");
-        resp2http$response;
         print("### RESP 3");
         resp3;
         print("### RESP 4");
