@@ -97,3 +97,6 @@ jobs:
 
         
       shell: Rscript {0}
+    - name: Traceback
+      run: traceback()
+      shell: Rscript {0}
