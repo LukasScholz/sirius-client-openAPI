@@ -25,7 +25,7 @@ sed -i "s@^\([[:blank:]]*\)api_response\$response <- resp %>% resp_body_string()
 # allow response being a URL
 sed -i "s@^\([[:blank:]]*\)resp_obj <- jsonlite::fromJSON(raw_response)@\1if (startsWith(raw_response, \"https://auth0.bright-giant.com\")) {\n\1  resp_obj <- raw_response\n\1} else {\n\1  resp_obj <- jsonlite::fromJSON(raw_response)\n\1}@" $1
 # fix Structure Candidate deserialization error
-sed -i 's@^\([[:blank:]]*\)if (c(inner_return_type) %in% primitive_types) {@{n;N;N;N;N;N;d}@' $1
+sed -i 's@^\([[:blank:]]*\)if (c(inner_return_type) %in% primitive_types) {@{n;N;N;N;N;N;d}' $1
 # sed -i 's@^\([[:blank:]]*\)if (c(inner_return_type) %in% primitive_types) {@\
 #         \1if (c(inner_return_type) %in% primitive_types) {\n\
 #         \1  if (inner_return_type == "integer" && is.list(obj) && length(obj)>0 && exists("obj"[[1]])) {\n\
