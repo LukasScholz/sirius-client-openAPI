@@ -58,30 +58,33 @@ jobs:
         resp <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, TRUE, TRUE, TRUE, 10);
         
         resp1 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, TRUE, TRUE);
-        resp2 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, TRUE, TRUE);
-        resp3 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, FALSE, TRUE);
-        resp4 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, TRUE, FALSE);
-        resp5 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, FALSE, TRUE);
-        resp6 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, TRUE, FALSE);
-        resp7 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, FALSE, FALSE);
-        resp8 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, FALSE, FALSE);
         print("### RESP 1");
         resp1;
+        resp2http <- api_instance$GetTopStructureCandidateWithHttpInfo(pid, compoundId, FALSE, TRUE, TRUE);
+        print("### RESP 2 HTTP");
+        resp2http;
+        resp2 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, TRUE, TRUE);
         print("### RESP 2");
         resp2;
+        resp3 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, FALSE, TRUE);
         print("### RESP 3");
         resp3;
+        resp4 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, TRUE, FALSE);
         print("### RESP 4");
         resp4;
+        resp5 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, FALSE, TRUE);
         print("### RESP 5");
         resp5;
+        resp6 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, TRUE, FALSE);
         print("### RESP 6");
         resp6;
+        resp7 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, FALSE, FALSE);
         print("### RESP 7");
         resp7;
+        resp8 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, FALSE, FALSE);
         print("### RESP 8");
         resp8;
-
+        
         isTRUE(is.list(resp));
         sapply(resp, function(x) {print(x)});
         isTRUE(all(sapply(resp, function(x) {inherits(x, "StructureCandidate")})));
@@ -91,9 +94,9 @@ jobs:
 #         resp2$response;
 #         resp2 <- api_instance$GetStructureCandidates(pid, compoundId, formulaId, FALSE, TRUE, FALSE, 10);
 #         resp2;
-
-        
       shell: Rscript {0}
+      
     - name: Traceback
+      if: always() 
       run: traceback()
       shell: Rscript {0}
