@@ -60,9 +60,10 @@ jobs:
         resp1 <- api_instance$GetTopStructureCandidate(pid, compoundId, TRUE, TRUE, TRUE);
         print("### RESP 1");
         resp1;
+        print("after resp1")
         resp2http <- api_instance$GetTopStructureCandidateWithHttpInfo(pid, compoundId, FALSE, TRUE, TRUE);
         print("### RESP 2 HTTP");
-        resp2http;
+        resp2http$response;
         resp2 <- api_instance$GetTopStructureCandidate(pid, compoundId, FALSE, TRUE, TRUE);
         print("### RESP 2");
         resp2;
