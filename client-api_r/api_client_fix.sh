@@ -28,20 +28,20 @@ sed -i "s@^\([[:blank:]]*\)resp_obj <- jsonlite::fromJSON(raw_response)@\1if (st
 # delete lines
 sed -i 's@^[[:blank:]]*if (c(inner_return_type) \%in\% primitive_types) {@{n;N;N;N;N;N;d}' $1
 # replace deleted lines
-sed -i 's@^\([[:blank:]]*\)if (c(inner_return_type) %in% primitive_types) {@\
-\1if (c(inner_return_type) %in% primitive_types) {\n\
-\1  if (inner_return_type == "integer" && is.list(obj) && length(obj)>0 && exists("obj"[[1]])) {\n\
-\1    return_obj <- vector("list", length = length(obj[[1]]))\n\
-\1    if (length(obj[[1]]) > 0) {\n\
-\1      for (row in 1:length(obj[[1]])) {\n\
-\1        return_obj[[row]] <- self$deserializeObj(obj[[1]][row], inner_return_type, pkg_env)\n\
+sed -i 's@^\([[:blank:]]*\)if (c(inner_return_type) \%in\% primitive_types) {@\
+\1if (c(inner_return_type) \%in\% primitive_types) {\n\
+\1  if (inner_return_type == "integer" \&\& is.list(obj) \&\& length(obj)>0 \&\& exists("obj"\[\[1\]\])) {\n\
+\1    return_obj <- vector("list", length = length(obj\[\[1\]\]))\n\
+\1    if (length(obj\[\[1\]\]) > 0) {\n\
+\1      for (row in 1:length(obj\[\[1\]\])) {\n\
+\1        return_obj\[\[row\]\] <- self$deserializeObj(obj\[\[1\]\]\[row\], inner_return_type, pkg_env)\n\
 \1      }\n\
 \1    }\n\
 \1  } else {\n\
 \1    return_obj <- vector("list", length = length(obj))\n\
 \1    if (length(obj) > 0) {\n\
 \1      for (row in 1:length(obj)) {\n\
-\1        return_obj[[row]] <- self$deserializeObj(obj[row], inner_return_type, pkg_env)\n\
+\1        return_obj\[\[row\]\] <- self$deserializeObj(obj\[row\], inner_return_type, pkg_env)\n\
 \1      }\n\
 \1    }\n\
 \1  }@' $1             
