@@ -19,7 +19,7 @@ if [ ! -f $1 ]; then
 fi
 
 # delete lines
-sed -i '/^[[:blank:]]*initialize = function\(content = NULL,/{n;n;n;n;n;n;N;N;N;N;d}' $1
+sed -i '/^[[:blank:]]*self$content <- content/{n;N;N;N;N;d}' $1
 # replace deleted lines
 # allow initialization of type $new("string", api_response_class)
 # that is used in the *_api.R classes
