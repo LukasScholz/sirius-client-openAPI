@@ -19,12 +19,11 @@ if [ ! -f $1 ]; then
 fi
 
 # delete lines
-sed -i '/^[[:blank:]]*self$content <- content/{n;N;N;N;N;d}' $1
+sed -i '/^[[:blank:]]*self$content <- content/{n;N;N;N;d}' $1
 # replace deleted lines
 # allow initialization of type $new("string", api_response_class)
 # that is used in the *_api.R classes
 sed -i 's@^\([[:blank:]]*\)self$content <- content@\
-\
 \1# allow initialization of type $new(\"string\", api_response_class)\
 \1# that is used in the *_api.R classes\
 \1if (typeof(response) == \"environment\"){\
