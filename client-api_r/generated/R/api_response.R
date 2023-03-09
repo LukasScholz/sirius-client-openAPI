@@ -58,10 +58,5 @@ ApiResponse <- R6::R6Class(
         self$status_code_desc <- status_code_desc
         self$headers <- headers
       }
-      self$response <- response
-      self$status_code <- status_code
-      self$status_code_desc <- status_code_desc
-      self$headers <- headers
-    }
   )
 )
