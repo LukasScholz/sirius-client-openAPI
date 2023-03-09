@@ -90,9 +90,6 @@ jobs:
         chmod +x ./client-api_r/api_response_fix.sh
         ./client-api_r/api_response_fix.sh ./client-api_r/generated/R/api_response.R
         
-        #chmod +x ./client-api_r/job_submission_fix.sh
-        #./client-api_r/job_submission_fix.sh ./client-api_r/generated/R/job_submission.R
-        
         chmod +x ./client-api_r/api_client_fix.sh
         ./client-api_r/api_client_fix.sh ./client-api_r/generated/R/api_client.R
         
