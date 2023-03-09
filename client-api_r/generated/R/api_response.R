@@ -40,7 +40,6 @@ ApiResponse <- R6::R6Class(
                           status_code_desc = NULL,
                           headers = NULL) {
 
-
       # allow initialization of type $new("string", api_response_class)
       # that is used in the *_api.R classes
       if (typeof(response) == "environment"){
@@ -58,5 +57,6 @@ ApiResponse <- R6::R6Class(
         self$status_code_desc <- status_code_desc
         self$headers <- headers
       }
+    }
   )
 )
