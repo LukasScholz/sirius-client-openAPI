@@ -1,3 +1,5 @@
+## CURRENTLY NOT USED - MADE OBSOLETE BY TEMPLATE CHANGE
+
 #!/bin/bash
 
 # Check if the input file is given as an argument
