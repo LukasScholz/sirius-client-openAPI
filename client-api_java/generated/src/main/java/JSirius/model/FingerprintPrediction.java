@@ -49,7 +49,7 @@ import JSirius.JSON;
  * User/developer friendly parameter subset for the CSI:FingerID Fingerprint tool
  */
 @ApiModel(description = "User/developer friendly parameter subset for the CSI:FingerID Fingerprint tool")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-03-14T15:39:20.126029Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-03-14T15:51:38.278544Z[Etc/UTC]")
 public class FingerprintPrediction {
   public static final String SERIALIZED_NAME_ENABLED = "enabled";
   @SerializedName(SERIALIZED_NAME_ENABLED)
